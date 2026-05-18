@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNotify – Educational Portal</title>
+    <meta name="description" content="EduNotify is a smart educational notification portal connecting students, professors, and administrators seamlessly.">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===================== SPLASH SCREEN ===================== -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-inner">
+
+            <!-- Animated background lines (minimalistic) -->
+            <div class="bg-lines" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+
+            <!-- Logo mark -->
+            <div class="splash-logo" aria-label="EduNotify logo">
+                <div class="logo-mark">
+                    <div class="logo-ring"></div>
+                    <i class="fa-solid fa-graduation-cap logo-cap"></i>
+                </div>
+            </div>
+
+            <!-- Brand name -->
+            <div class="splash-brand">
+                <span class="brand-edu">Edu</span><span class="brand-notify">Notify</span>
+            </div>
+
+            <!-- Tagline -->
+            <p class="splash-tagline">Smart notifications for every learner</p>
+
+            <!-- Minimal progress line -->
+            <div class="splash-progress" aria-hidden="true">
+                <div class="splash-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== MAIN APP ===================== -->
+    <div id="app-wrapper" class="app-wrapper">
+
+        <!-- Subtle decorative background -->
+        <div class="app-bg-deco" aria-hidden="true">
+            <div class="deco-circle deco-c1"></div>
+            <div class="deco-circle deco-c2"></div>
+            <svg class="deco-wave" viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,80 C360,160 1080,0 1440,80 L1440,180 L0,180 Z" fill="rgba(99,130,201,0.06)"/>
+            </svg>
+        </div>
+
+        <div class="login-container">
+
+            <!-- ---- LEFT PANEL ---- -->
+            <div class="login-left-panel">
+                <div class="left-brand">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>EduNotify</span>
+                </div>
+
+                <div class="left-body">
+                    <h1 class="left-title" id="left-title">Welcome back.</h1>
+                    <p class="left-sub" id="left-sub">Sign in to access your personalised academic portal, receive instant notifications, and stay connected with your institution.</p>
+
+                    <!-- Role cards overview -->
+                    <div class="role-overview">
+                        <div class="role-ov-item">
+                            <i class="fa-solid fa-user-graduate"></i>
+                            <span>Students</span>
+                        </div>
+                        <div class="role-ov-item">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                            <span>Professors</span>
+                        </div>
+                        <div class="role-ov-item">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <span>Admins</span>
+                        </div>
+                        <div class="role-ov-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Super Admin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="left-footer">© 2026 EduNotify. All rights reserved.</p>
+            </div>
+
+            <!-- ---- RIGHT PANEL ---- -->
+            <div class="login-right-panel">
+                <div class="form-card">
+
+                    <!-- ── Tab switcher ── -->
+                    <div class="auth-tabs" id="auth-tabs">
+                        <button class="auth-tab active" id="tab-login" data-tab="login">Sign In</button>
+                        <button class="auth-tab" id="tab-register" data-tab="register">Register</button>
+                        <span class="auth-tab-indicator" id="tab-indicator"></span>
+                    </div>
+
+                    <!-- ════════ LOGIN SIDE ════════ -->
+                    <div id="login-side" class="auth-side active-side">
+
+                        <!-- Step 1 – Role selection -->
+                        <div id="step-role" class="step step-role active-step">
+                            <div class="form-header">
+                                <p class="form-step-label">Step 1 of 2</p>
+                                <h2 class="form-title">Who are you?</h2>
+                                <p class="form-subtitle">Choose your role to continue</p>
+                            </div>
+
+                            <div class="roles-grid" id="roles-grid">
+                                <button class="role-card" data-role="student" id="role-student" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Student</strong>
+                                        <span>Access notices &amp; grades</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                                <button class="role-card" data-role="professor" id="role-professor" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Professor</strong>
+                                        <span>Manage courses &amp; announcements</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                                <button class="role-card" data-role="admin" id="role-admin" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-user-gear"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Admin</strong>
+                                        <span>Oversee institutional operations</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                                <button class="role-card" data-role="superadmin" id="role-superadmin" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Super Admin</strong>
+                                        <span>Full system access &amp; control</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 – Login form -->
+                        <div id="step-login" class="step step-login">
+                            <div class="form-header">
+                                <p class="form-step-label">Step 2 of 2</p>
+                                <div class="role-badge" id="role-badge">
+                                    <i id="badge-icon" class="fa-solid fa-user-graduate"></i>
+                                    <span id="badge-label">Student</span>
+                                </div>
+                                <h2 class="form-title" id="form-title">Student Login</h2>
+                                <p class="form-subtitle">Enter your credentials to continue</p>
+                            </div>
+
+                            <form id="login-form" class="login-form" novalidate>
+                                <div class="input-group">
+                                    <label for="userId">ID or Email</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-regular fa-envelope input-icon"></i>
+                                        <input type="text" id="userId" name="userId"
+                                               placeholder="student@institution.edu" required autocomplete="username">
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="password">Password</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-solid fa-lock input-icon"></i>
+                                        <input type="password" id="password" name="password"
+                                               placeholder="••••••••" required autocomplete="current-password">
+                                        <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Toggle password visibility">
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Inline error -->
+                                <p class="form-error" id="login-error" role="alert"></p>
+
+                                <div class="form-actions">
+                                    <label class="remember-label">
+                                        <input type="checkbox" id="remember-me">
+                                        <span class="checkmark"></span>
+                                        <span>Remember me</span>
+                                    </label>
+                                    <a href="#" class="forgot-link">Forgot password?</a>
+                                </div>
+
+                                <button type="submit" class="submit-btn" id="submit-btn">
+                                    <span>Sign In</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </form>
+
+                            <button class="back-btn" id="back-btn">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Change role</span>
+                            </button>
+                        </div>
+
+                    </div><!-- /login-side -->
+
+                    <!-- ════════ REGISTER SIDE ════════ -->
+                    <div id="register-side" class="auth-side">
+
+                        <!-- Reg Step 1 – Who are you? -->
+                        <div id="reg-step-role" class="step active-step">
+                            <div class="form-header">
+                                <p class="form-step-label">Step 1 of 2</p>
+                                <h2 class="form-title">Create an account</h2>
+                                <p class="form-subtitle">Select the role you are registering as</p>
+                            </div>
+
+                            <div class="roles-grid" id="reg-roles-grid">
+                                <button class="role-card" data-role="student" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Student</strong>
+                                        <span>Access notices &amp; grades</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                                <button class="role-card" data-role="professor" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Professor</strong>
+                                        <span>Manage courses &amp; announcements</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                                <button class="role-card" data-role="admin" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-user-gear"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Admin</strong>
+                                        <span>Oversee institutional operations</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                                <button class="role-card" data-role="superadmin" aria-pressed="false">
+                                    <div class="role-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                                    <div class="role-card-text">
+                                        <strong>Super Admin</strong>
+                                        <span>Full system access &amp; control</span>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right role-card-arrow"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Reg Step 2 – Registration form -->
+                        <div id="reg-step-form" class="step">
+                            <div class="form-header">
+                                <p class="form-step-label">Step 2 of 2</p>
+                                <div class="role-badge" id="reg-role-badge">
+                                    <i id="reg-badge-icon" class="fa-solid fa-user-graduate"></i>
+                                    <span id="reg-badge-label">Student</span>
+                                </div>
+                                <h2 class="form-title">Register as <span id="reg-form-role">Student</span></h2>
+                                <p class="form-subtitle">Fill in your details to create your account</p>
+                            </div>
+
+                            <form id="register-form" class="login-form" novalidate>
+
+                                <div class="input-row">
+                                    <div class="input-group">
+                                        <label for="reg-first">First name</label>
+                                        <div class="input-wrapper">
+                                            <i class="fa-regular fa-user input-icon"></i>
+                                            <input type="text" id="reg-first" name="reg-first"
+                                                   placeholder="Jane" required autocomplete="given-name">
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="reg-last">Last name</label>
+                                        <div class="input-wrapper">
+                                            <i class="fa-regular fa-user input-icon"></i>
+                                            <input type="text" id="reg-last" name="reg-last"
+                                                   placeholder="Doe" required autocomplete="family-name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="reg-id">Institution ID</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-solid fa-id-card input-icon"></i>
+                                        <input type="text" id="reg-id" name="reg-id"
+                                               placeholder="STU-2026-001" required autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="reg-email">Email address</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-regular fa-envelope input-icon"></i>
+                                        <input type="email" id="reg-email" name="reg-email"
+                                               placeholder="jane@institution.edu" required autocomplete="email">
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="reg-password">Password</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-solid fa-lock input-icon"></i>
+                                        <input type="password" id="reg-password" name="reg-password"
+                                               placeholder="Min. 8 characters" required autocomplete="new-password">
+                                        <button type="button" class="pw-toggle" id="reg-pw-toggle" aria-label="Toggle password visibility">
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="reg-confirm">Confirm password</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-solid fa-lock input-icon"></i>
+                                        <input type="password" id="reg-confirm" name="reg-confirm"
+                                               placeholder="Repeat password" required autocomplete="new-password">
+                                    </div>
+                                </div>
+
+                                <!-- Inline error -->
+                                <p class="form-error" id="reg-error" role="alert"></p>
+
+                                <button type="submit" class="submit-btn" id="reg-submit-btn">
+                                    <span>Create Account</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </form>
+
+                            <button class="back-btn" id="reg-back-btn">
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Change role</span>
+                            </button>
+                        </div>
+
+                    </div><!-- /register-side -->
+
+                </div><!-- /form-card -->
+            </div><!-- /login-right-panel -->
+
+        </div><!-- /login-container -->
+    </div><!-- /app-wrapper -->
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <div id="dashboard-wrapper" class="dashboard-wrapper dash-hidden">
+
+        <!-- Sidebar -->
+        <aside class="dash-sidebar" id="dash-sidebar">
+            <div class="dash-logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>EduNotify</span>
+            </div>
+            <nav class="dash-nav-menu" id="dash-nav-menu"></nav>
+            <div class="dash-sidebar-footer">
+                <button id="signout-btn" class="signout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="dash-main">
+            <header class="dash-topbar">
+                <div class="dash-topbar-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <span class="dash-page-title" id="dash-page-title">Overview</span>
+                </div>
+                <div class="dash-topbar-right">
+                    <div class="dash-notif-btn">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-dot"></span>
+                    </div>
+                    <div class="dash-user-chip">
+                        <div class="dash-avatar" id="dash-avatar">A</div>
+                        <div>
+                            <p class="dash-uname" id="dash-uname">Name</p>
+                            <p class="dash-urole" id="dash-urole">Role</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dash-body">
+
+                <!-- ── STUDENT ── -->
+                <div id="dash-student" class="role-dash dash-hidden">
+                    <div class="welcome-banner">
+                        <div>
+                            <h1>Good day, <span class="greet-name" id="greet-student">Student</span>! 👋</h1>
+                            <p>Here's what's happening at your institution today.</p>
+                        </div>
+                        <i class="fa-solid fa-user-graduate welcome-icon"></i>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fa-solid fa-book-open"></i></div><div><p class="stat-val">6</p><p class="stat-lbl">Active Courses</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fa-solid fa-bell"></i></div><div><p class="stat-val">3</p><p class="stat-lbl">Unread Notices</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><i class="fa-solid fa-calendar-check"></i></div><div><p class="stat-val">2</p><p class="stat-lbl">Upcoming Exams</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><i class="fa-solid fa-star"></i></div><div><p class="stat-val">82%</p><p class="stat-lbl">Avg. Grade</p></div></div>
+                    </div>
+                    <div class="panels-row">
+                        <div class="dash-panel">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-bell"></i> Recent Notices</h3><a href="#" class="view-all">View all</a></div>
+                            <div class="notice-item urgent"><span class="ndot"></span><div><p class="ntitle">Mid-term Exam Schedule Released</p><span class="nmeta">Admin · 2 hrs ago</span></div><span class="ntag tag-urgent">Urgent</span></div>
+                            <div class="notice-item"><span class="ndot"></span><div><p class="ntitle">Library hours extended till 10 PM</p><span class="nmeta">Admin · 1 day ago</span></div><span class="ntag tag-info">Info</span></div>
+                            <div class="notice-item"><span class="ndot"></span><div><p class="ntitle">Assignment 3 – DB Systems due Friday</p><span class="nmeta">Prof. Smith · 2 days ago</span></div><span class="ntag tag-warn">Deadline</span></div>
+                        </div>
+                        <div class="dash-panel">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-calendar-days"></i> This Week</h3></div>
+                            <div class="sched-item"><div class="sched-time">Mon 9:00</div><div class="sched-info"><p>Data Structures</p><span>Room 201 · Prof. Khan</span></div></div>
+                            <div class="sched-item"><div class="sched-time">Tue 11:00</div><div class="sched-info"><p>Web Technologies</p><span>Room 105 · Prof. Lee</span></div></div>
+                            <div class="sched-item"><div class="sched-time">Wed 14:00</div><div class="sched-info"><p>Database Systems</p><span>Lab 3 · Prof. Smith</span></div></div>
+                            <div class="sched-item"><div class="sched-time">Thu 10:00</div><div class="sched-info"><p>Software Engineering</p><span>Room 302 · Prof. Ray</span></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── PROFESSOR ── -->
+                <div id="dash-professor" class="role-dash dash-hidden">
+                    <div class="welcome-banner prof-banner">
+                        <div>
+                            <h1>Welcome, Prof. <span class="greet-name" id="greet-professor">Name</span>! 🎓</h1>
+                            <p>Manage your courses and keep students informed.</p>
+                        </div>
+                        <i class="fa-solid fa-chalkboard-user welcome-icon"></i>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><i class="fa-solid fa-chalkboard"></i></div><div><p class="stat-val">4</p><p class="stat-lbl">My Courses</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#ffecd2,#fcb69f)"><i class="fa-solid fa-users"></i></div><div><p class="stat-val">148</p><p class="stat-lbl">Total Students</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#a1c4fd,#c2e9fb)"><i class="fa-solid fa-file-pen"></i></div><div><p class="stat-val">7</p><p class="stat-lbl">Pending Grades</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#d4fc79,#96e6a1)"><i class="fa-solid fa-bullhorn"></i></div><div><p class="stat-val">12</p><p class="stat-lbl">Notices Posted</p></div></div>
+                    </div>
+                    <div class="panels-row">
+                        <div class="dash-panel">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-chalkboard"></i> My Courses</h3></div>
+                            <div class="course-item"><div class="course-badge" style="background:#667eea">DS</div><div><p class="cname">Data Structures</p><span>42 students · Mon, Wed 9:00</span></div><span class="cpill">Active</span></div>
+                            <div class="course-item"><div class="course-badge" style="background:#f5576c">DB</div><div><p class="cname">Database Systems</p><span>38 students · Wed 14:00</span></div><span class="cpill">Active</span></div>
+                            <div class="course-item"><div class="course-badge" style="background:#43e97b">OS</div><div><p class="cname">Operating Systems</p><span>36 students · Thu 10:00</span></div><span class="cpill">Active</span></div>
+                            <div class="course-item"><div class="course-badge" style="background:#f093fb">AI</div><div><p class="cname">Intro to AI</p><span>32 students · Fri 11:00</span></div><span class="cpill">Active</span></div>
+                        </div>
+                        <div class="dash-panel">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-bullhorn"></i> Post a Notice</h3></div>
+                            <form class="notice-form" id="prof-notice-form">
+                                <select class="nf-input" id="nf-course">
+                                    <option value="">Select course…</option>
+                                    <option>Data Structures</option>
+                                    <option>Database Systems</option>
+                                    <option>Operating Systems</option>
+                                    <option>Intro to AI</option>
+                                </select>
+                                <input class="nf-input" type="text" id="nf-title" placeholder="Notice title…">
+                                <textarea class="nf-input" id="nf-body" rows="3" placeholder="Write your notice here…"></textarea>
+                                <button type="submit" class="nf-btn"><i class="fa-solid fa-paper-plane"></i> Post Notice</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── ADMIN ── -->
+                <div id="dash-admin" class="role-dash dash-hidden">
+                    <div class="welcome-banner admin-banner">
+                        <div>
+                            <h1>Admin Panel – <span class="greet-name" id="greet-admin">Name</span> 🛡️</h1>
+                            <p>Oversee institutional operations and manage users.</p>
+                        </div>
+                        <i class="fa-solid fa-user-gear welcome-icon"></i>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fa-solid fa-users"></i></div><div><p class="stat-val">420</p><p class="stat-lbl">Total Students</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fa-solid fa-chalkboard-user"></i></div><div><p class="stat-val">28</p><p class="stat-lbl">Professors</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><i class="fa-solid fa-book"></i></div><div><p class="stat-val">34</p><p class="stat-lbl">Active Courses</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#fa709a,#fee140)"><i class="fa-solid fa-triangle-exclamation"></i></div><div><p class="stat-val">5</p><p class="stat-lbl">Pending Requests</p></div></div>
+                    </div>
+                    <div class="panels-row">
+                        <div class="dash-panel" style="flex:2">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-users"></i> Recent Registrations</h3><a href="#" class="view-all">Manage all</a></div>
+                            <table class="user-table">
+                                <thead><tr><th>Name</th><th>Role</th><th>ID</th><th>Joined</th><th>Status</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Aisha Rahman</td><td><span class="role-pill student">Student</span></td><td>STU-2026-042</td><td>Today</td><td><span class="status active">Active</span></td></tr>
+                                    <tr><td>Dr. Marcus Lee</td><td><span class="role-pill professor">Professor</span></td><td>PROF-2026-011</td><td>Yesterday</td><td><span class="status active">Active</span></td></tr>
+                                    <tr><td>Riya Sharma</td><td><span class="role-pill student">Student</span></td><td>STU-2026-041</td><td>2 days ago</td><td><span class="status pending">Pending</span></td></tr>
+                                    <tr><td>Tom Nguyen</td><td><span class="role-pill student">Student</span></td><td>STU-2026-040</td><td>3 days ago</td><td><span class="status active">Active</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="dash-panel">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-bullhorn"></i> Broadcast Notice</h3></div>
+                            <form class="notice-form" id="admin-notice-form">
+                                <select class="nf-input" id="an-audience">
+                                    <option>All Users</option>
+                                    <option>Students Only</option>
+                                    <option>Professors Only</option>
+                                </select>
+                                <input class="nf-input" type="text" id="an-title" placeholder="Notice title…">
+                                <textarea class="nf-input" id="an-body" rows="3" placeholder="Write your notice…"></textarea>
+                                <button type="submit" class="nf-btn"><i class="fa-solid fa-paper-plane"></i> Broadcast</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── SUPER ADMIN ── -->
+                <div id="dash-superadmin" class="role-dash dash-hidden">
+                    <div class="welcome-banner super-banner">
+                        <div>
+                            <h1>Super Admin – <span class="greet-name" id="greet-superadmin">Name</span> ⚡</h1>
+                            <p>Full system access and control over EduNotify.</p>
+                        </div>
+                        <i class="fa-solid fa-shield-halved welcome-icon"></i>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fa-solid fa-users"></i></div><div><p class="stat-val">451</p><p class="stat-lbl">All Users</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fa-solid fa-user-gear"></i></div><div><p class="stat-val">3</p><p class="stat-lbl">Admins</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><i class="fa-solid fa-chalkboard-user"></i></div><div><p class="stat-val">28</p><p class="stat-lbl">Professors</p></div></div>
+                        <div class="stat-card"><div class="stat-ico" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><i class="fa-solid fa-user-graduate"></i></div><div><p class="stat-val">420</p><p class="stat-lbl">Students</p></div></div>
+                    </div>
+                    <div class="panels-row">
+                        <div class="dash-panel" style="flex:2">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-database"></i> Live Users (Firebase)</h3><a href="#" class="view-all" id="refresh-users"><i class="fa-solid fa-rotate"></i> Refresh</a></div>
+                            <div id="live-users-table"><p class="loading-msg"><i class="fa-solid fa-spinner fa-spin"></i> Loading…</p></div>
+                        </div>
+                        <div class="dash-panel">
+                            <div class="panel-hdr"><h3><i class="fa-solid fa-circle-check"></i> System Status</h3></div>
+                            <div class="sys-status-item"><span>Firebase Auth</span><span class="status active">● Online</span></div>
+                            <div class="sys-status-item"><span>Firestore DB</span><span class="status active">● Online</span></div>
+                            <div class="sys-status-item"><span>Vercel Hosting</span><span class="status active">● Online</span></div>
+                            <div class="sys-status-item"><span>Last Backup</span><span class="status pending">Today 00:00</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /dash-body -->
+        </main>
+    </div><!-- /dashboard-wrapper -->
+
+    <!-- ── Success Toast ── -->
+    <div id="toast" class="toast" role="status" aria-live="polite">
+        <i id="toast-icon" class="fa-solid fa-check-circle"></i>
+        <span id="toast-msg"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
