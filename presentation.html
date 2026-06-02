@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNotify Presentation – Smart Educational Notification Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="presentation.css">
+</head>
+<body>
+
+    <div class="presentation-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="presentation-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>EduNotify</span>
+            </div>
+            <div class="sidebar-menu" id="sidebar-menu">
+                <!-- Javascript will inject list of slides here -->
+            </div>
+        </aside>
+
+        <!-- Main Slide Area -->
+        <main class="slide-viewer">
+            
+            <div class="slides-container" id="slides-container">
+                
+                <!-- Slide 1: Cover Page -->
+                <section class="slide active" id="slide-1" data-title="Cover Page">
+                    <div class="cover-layout">
+                        <div class="cover-badge">Bachelor's Degree Project</div>
+                        <h1 class="main-title">EduNotify</h1>
+                        <p class="main-subtitle">Smart Educational Notification Portal</p>
+                        <div class="accent-line"></div>
+                        <p class="course-subject">Programming for Data Science — Faculty of Computing</p>
+                        <div class="metadata-grid">
+                            <div class="meta-item"><strong>Student Name:</strong> Ken Aldrn</div>
+                            <div class="meta-item"><strong>Programme:</strong> B.S. Information Technology</div>
+                            <div class="meta-item"><strong>Semester:</strong> 7th Semester, 2025–2026</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Abstract / Executive Summary -->
+                <section class="slide" id="slide-2" data-title="Abstract">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">1. Abstract & Executive Summary</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3 class="highlight-title">The Solution</h3>
+                                <p><strong>EduNotify</strong> is a cloud-based, multi-role Smart Notification Portal designed to bridge the communication gap between students, professors, and administrators within academic environments.</p>
+                                <p>By organizing notice delivery into tailored role streams, it resolves information fragmentation, delays, and critical missed deadlines.</p>
+                            </div>
+                            <div class="card-grid">
+                                <div class="stat-card blue">
+                                    <div class="icon"><i class="fa-solid fa-cloud"></i></div>
+                                    <div class="stat-details">
+                                        <h4>Cloud Serverless</h4>
+                                        <p>Firebase & Vercel integration</p>
+                                    </div>
+                                </div>
+                                <div class="stat-card green">
+                                    <div class="icon"><i class="fa-solid fa-user-shield"></i></div>
+                                    <div class="stat-details">
+                                        <h4>4 User Roles</h4>
+                                        <p>Secure authentication & routing</p>
+                                    </div>
+                                </div>
+                                <div class="stat-card purple">
+                                    <div class="icon"><i class="fa-solid fa-clock"></i></div>
+                                    <div class="stat-details">
+                                        <h4>Real-Time Sync</h4>
+                                        <p>Live Firestore updates</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Introduction -->
+                <section class="slide" id="slide-3" data-title="Introduction">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">2. Introduction & Background</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>Academic Communication Bottlenecks</h3>
+                                <p>Educational institutions generate vast amounts of time-sensitive info daily — exam schedules, deadlines, course revisions, and fee bulletins. Traditional methods like physical notice boards or mass emails fail due to clutter and latency.</p>
+                                <ul class="bullet-list">
+                                    <li><i class="fa-solid fa-circle-chevron-right text-blue"></i> Physical boards require manual presence</li>
+                                    <li><i class="fa-solid fa-circle-chevron-right text-blue"></i> Mass emails suffer from severe spam clutter</li>
+                                    <li><i class="fa-solid fa-circle-chevron-right text-blue"></i> Messaging apps lack structure and archiving</li>
+                                </ul>
+                            </div>
+                            <div class="info-box-container">
+                                <div class="premium-box">
+                                    <h4>Industry Relevance</h4>
+                                    <p>Enterprise Student Information Systems (SIS) like Moodle or Canvas are heavy and expensive. EduNotify targets mid-size institutions needing a <strong>rapidly deployable, cost-free, lightweight</strong> notification hub.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: Problem Statement -->
+                <section class="slide" id="slide-4" data-title="Problem Statement">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">3. Problem Statement & Significance</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>The Impact of Communication Failures</h3>
+                                <p>Missed notice schedules lead directly to missed exams, overdue assignments, and administrative delays. Surveys indicate <strong>67% of university students</strong> miss at least one important notice per semester due to fragmented channels.</p>
+                                <h4 class="mt-4">Current System Limitations:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><i class="fa-solid fa-xmark text-red"></i> No role-based access control (RBAC)</li>
+                                    <li><i class="fa-solid fa-xmark text-red"></i> No persistent notification archive</li>
+                                    <li><i class="fa-solid fa-xmark text-red"></i> No centralized user verification auditing</li>
+                                    <li><i class="fa-solid fa-xmark text-red"></i> High administrative overhead</li>
+                                </ul>
+                            </div>
+                            <div class="chart-mockup">
+                                <h4>Communication Channel Analysis</h4>
+                                <div class="bar-chart">
+                                    <div class="bar-item">
+                                        <span>WhatsApp</span>
+                                        <div class="bar-container"><div class="bar-fill red" style="width: 85%">85% Noise</div></div>
+                                    </div>
+                                    <div class="bar-item">
+                                        <span>Emails</span>
+                                        <div class="bar-container"><div class="bar-fill orange" style="width: 60%">60% Delayed</div></div>
+                                    </div>
+                                    <div class="bar-item">
+                                        <span>EduNotify</span>
+                                        <div class="bar-container"><div class="bar-fill green" style="width: 98%">98% Relevant</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 5: Project Objectives -->
+                <section class="slide" id="slide-5" data-title="Project Objectives">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">4. Project Objectives</h2>
+                        <div class="objectives-grid">
+                            <div class="obj-card">
+                                <div class="obj-num">01</div>
+                                <h3>Secure RBAC</h3>
+                                <p>Implement role-based credentials validation and login routing using Firebase Authentication.</p>
+                            </div>
+                            <div class="obj-card">
+                                <div class="obj-num">02</div>
+                                <h3>Custom Dashboards</h3>
+                                <p>Provide 4 separate interfaces: Student, Professor, Admin, and Super Admin dashboard views.</p>
+                            </div>
+                            <div class="obj-card">
+                                <div class="obj-num">03</div>
+                                <h3>Notice Broadcasting</h3>
+                                <p>Allow course notice posting by professors and global audience broadcasts by administrative staff.</p>
+                            </div>
+                            <div class="obj-card">
+                                <div class="obj-num">04</div>
+                                <h3>Cloud Deployment</h3>
+                                <p>Host statically on Vercel Edge CDN with live database bindings and zero infrastructure costs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 6: Literature Review -->
+                <section class="slide" id="slide-6" data-title="Literature Review">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">5. Literature Review & Gap Analysis</h2>
+                        <table class="slide-table">
+                            <thead>
+                                <tr>
+                                    <th>System Category</th>
+                                    <th>Representative Platform</th>
+                                    <th>Core Advantages</th>
+                                    <th>Identified Gap / Weakness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Enterprise LMS</strong></td>
+                                    <td>Moodle, Canvas, Blackboard</td>
+                                    <td>Comprehensive feature suites</td>
+                                    <td>High cost, steep learning curve, heavy servers</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Public Cloud LMS</strong></td>
+                                    <td>Google Classroom</td>
+                                    <td>User-friendly, cost-free</td>
+                                    <td>No institutional administrative hierarchy control</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Social Platforms</strong></td>
+                                    <td>WhatsApp, Telegram Groups</td>
+                                    <td>Instant delivery, zero setup</td>
+                                    <td>No RBAC, unverified posts, no archival structure</td>
+                                </tr>
+                                <tr class="table-accent">
+                                    <td><strong>EduNotify</strong></td>
+                                    <td>Custom Cloud Portal</td>
+                                    <td>RBAC, modern UI, zero-cost</td>
+                                    <td>Early-stage development, lightweight features</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Slide 7: Methodology -->
+                <section class="slide" id="slide-7" data-title="Methodology">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">6. Proposed Development Methodology</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>Agile-Inspired Iterative Lifecycle</h3>
+                                <p>Developed over a five-week cycle using Agile principles divided into three sprints:</p>
+                                <ul class="timeline-list">
+                                    <li>
+                                        <strong>Sprint 1 (Weeks 1-2): UI/UX Prototyping</strong>
+                                        <p>Designing splash animation, forms, and responsive layouts.</p>
+                                    </li>
+                                    <li>
+                                        <strong>Sprint 2 (Week 3): Core Firebase Wiring</strong>
+                                        <p>Integrating Auth and Cloud Firestore document read/write handlers.</p>
+                                    </li>
+                                    <li>
+                                        <strong>Sprint 3 (Weeks 4-5): Dashboards & Vercel</strong>
+                                        <p>Completing role-specific dashboards, dark theme polishing, and edge CDN deployment.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="visual-box">
+                                <div class="methodology-flow">
+                                    <div class="flow-step">Design UI</div>
+                                    <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                                    <div class="flow-step">Firebase Integration</div>
+                                    <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                                    <div class="flow-step">Dashboards & Routing</div>
+                                    <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                                    <div class="flow-step">Deploy & Test</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 8: System Architecture -->
+                <section class="slide" id="slide-8" data-title="System Architecture">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">7. System Architecture & Flows</h2>
+                        <div class="content-grid col-2">
+                            <div class="architecture-diagram">
+                                <pre class="mono-code">
+┌──────────────────────────────────────────────┐
+│                  USER BROWSER                │
+│  ┌────────────┐  ┌──────────┐  ┌──────────┐  │
+│  │ index.html │  │style.css │  │script.js │  │
+│  └─────┬──────┘  └──────────┘  └────┬─────┘  │
+└────────┼────────────────────────────┼────────┘
+         │                            │
+         │     Firebase SDK (CDN)     │
+         └─────────────┬──────────────┘
+                       │
+┌──────────────────────▼───────────────────────┐
+│              GOOGLE FIREBASE CLOUD           │
+│   ┌────────────────────┐ ┌────────────────┐  │
+│   │   Firebase Auth    │ │Cloud Firestore │  │
+│   │ (Identity Gateway) │ │ (NoSQL Schema) │  │
+│   └────────────────────┘ └────────────────┘  │
+└──────────────────────────────────────────────┘
+                               </pre>
+                            </div>
+                            <div class="text-block">
+                                <h3>Data Pipeline Pipeline</h3>
+                                <p><strong>1. Serving:</strong> Vercel hosts static HTML/CSS/JS files, delivered via global edge servers.</p>
+                                <p><strong>2. Authentication:</strong> Browser communicates with Firebase Identity servers to validate role login tokens.</p>
+                                <p><strong>3. Document Routing:</strong> Profile document fetched by UID from Firestore. Router verifies role matches selection; redirects to proper dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 9: Technical Stack -->
+                <section class="slide" id="slide-9" data-title="Technical Stack">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">8. Technical Implementation Stack</h2>
+                        <div class="tech-stack-grid">
+                            <div class="tech-card">
+                                <div class="tech-icon html5"><i class="fa-brands fa-html5"></i></div>
+                                <h3>HTML5</h3>
+                                <p>Semantic structures, inputs validation, accessibility attributes.</p>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon css3"><i class="fa-brands fa-css3-alt"></i></div>
+                                <h3>CSS3 Custom</h3>
+                                <p>Variables, keyframe animations, glassmorphism filters, responsive grids.</p>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon js"><i class="fa-brands fa-js"></i></div>
+                                <h3>ES2022 JavaScript</h3>
+                                <p>Vanilla syntax, async/await bindings, dynamic DOM rendering.</p>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon firebase"><i class="fa-solid fa-fire"></i></div>
+                                <h3>Firebase Cloud</h3>
+                                <p>Authentication engine, secure Cloud Firestore NoSQL storage.</p>
+                            </div>
+                            <div class="tech-card">
+                                <div class="tech-icon vercel"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <h3>Vercel PaaS</h3>
+                                <p>Statically compiled edge hosting, auto-build hooks via GitHub.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 10: Database Schema -->
+                <section class="slide" id="slide-10" data-title="Database Schema">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">9. NoSQL Firestore Schema Design</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>The User Schema</h3>
+                                <p>Primary Collection: <code>users/{uid}</code></p>
+                                <p>Document ID is mapped exactly to the Firebase Authentication UID for high-efficiency, O(1) profile lookups on auth state changes.</p>
+                                <h4 class="mt-4">Document Fields:</h4>
+                                <ul class="mono-list">
+                                    <li><strong>uid:</strong> String (Document key)</li>
+                                    <li><strong>firstName:</strong> String (Trimming validated)</li>
+                                    <li><strong>lastName:</strong> String (Trimming validated)</li>
+                                    <li><strong>email:</strong> String (Auth unique key)</li>
+                                    <li><strong>institutionId:</strong> String (Index unique per role)</li>
+                                    <li><strong>role:</strong> Enum (student | professor | admin | superadmin)</li>
+                                    <li><strong>registered:</strong> Timestamp (Server timestamp)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-box schema-box">
+                                <div class="schema-diagram">
+                                    <div class="schema-header">Collection: users</div>
+                                    <div class="schema-doc">
+                                        <strong>Document (UID)</strong>
+                                        <pre class="json-code">
+{
+  "uid": "xKj8m3nPqR...",
+  "firstName": "Aisha",
+  "lastName": "Rahman",
+  "email": "a.rahman@uni.edu",
+  "institutionId": "ADM-2026-002",
+  "role": "admin",
+  "registered": "28/05/2026 15:20"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 11: Work Packages & Timeline -->
+                <section class="slide" id="slide-11" data-title="Project Schedule">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">10. Work Packages & Project Gantt</h2>
+                        <div class="gantt-container">
+                            <div class="gantt-header-slide">
+                                <div class="task-col">Project Module / Task</div>
+                                <div class="weeks-col">
+                                    <span>Wk 1</span>
+                                    <span>Wk 2</span>
+                                    <span>Wk 3</span>
+                                    <span>Wk 4</span>
+                                    <span>Wk 5</span>
+                                </div>
+                            </div>
+                            <div class="gantt-row-slide">
+                                <div class="task-col">Requirements & Architecture</div>
+                                <div class="weeks-col"><div class="g-bar bar-1"></div></div>
+                            </div>
+                            <div class="gantt-row-slide">
+                                <div class="task-col">UI Prototyping & Layouts</div>
+                                <div class="weeks-col"><div class="g-bar bar-2"></div></div>
+                            </div>
+                            <div class="gantt-row-slide">
+                                <div class="task-col">Firebase Integration & SDK</div>
+                                <div class="weeks-col"><div class="g-bar bar-3"></div></div>
+                            </div>
+                            <div class="gantt-row-slide">
+                                <div class="task-col">Dashboard Creation & Routing</div>
+                                <div class="weeks-col"><div class="g-bar bar-4"></div></div>
+                            </div>
+                            <div class="gantt-row-slide">
+                                <div class="task-col">Validation, Testing & Deployment</div>
+                                <div class="weeks-col"><div class="g-bar bar-5"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 12: SWOT Analysis -->
+                <section class="slide" id="slide-12" data-title="SWOT Analysis">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">11. SWOT Analysis</h2>
+                        <div class="swot-grid-slide">
+                            <div class="swot-box-slide strengths">
+                                <h3><i class="fa-solid fa-circle-check"></i> Strengths</h3>
+                                <ul>
+                                    <li>Zero infrastructure cost</li>
+                                    <li>Serverless maintenance</li>
+                                    <li>Responsive, adaptive layouts</li>
+                                    <li>Premium dark glassmorphism</li>
+                                </ul>
+                            </div>
+                            <div class="swot-box-slide weaknesses">
+                                <h3><i class="fa-solid fa-circle-exclamation"></i> Weaknesses</h3>
+                                <ul>
+                                    <li>Client-side code dependency</li>
+                                    <li>No offline-mode fallback</li>
+                                    <li>Firebase vendor lock-in</li>
+                                    <li>Notice CRUD not fully wired</li>
+                                </ul>
+                            </div>
+                            <div class="swot-box-slide opportunities">
+                                <h3><i class="fa-solid fa-rocket"></i> Opportunities</h3>
+                                <ul>
+                                    <li>AI notice smart ranking</li>
+                                    <li>PWA offline compilation</li>
+                                    <li>Twilio SMS integration</li>
+                                    <li>Multi-tenancy structures</li>
+                                </ul>
+                            </div>
+                            <div class="swot-box-slide threats">
+                                <h3><i class="fa-solid fa-triangle-exclamation"></i> Threats</h3>
+                                <ul>
+                                    <li>API key exposure risk</li>
+                                    <li>Scale billing pricing tiers</li>
+                                    <li>GDPR policy compliance</li>
+                                    <li>LMS legacy competitors</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 13: Risk Analysis -->
+                <section class="slide" id="slide-13" data-title="Risk Analysis">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">12. Risk Analysis & Mitigation</h2>
+                        <table class="slide-table text-sm">
+                            <thead>
+                                <tr>
+                                    <th>Risk Factor</th>
+                                    <th>Impact</th>
+                                    <th>Likelihood</th>
+                                    <th>Mitigation Strategy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Firebase Spark Quota limits</strong></td>
+                                    <td>High</td>
+                                    <td>Medium</td>
+                                    <td>Implement client-side session caching; move to Blaze scale tier when active users exceed 500.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unauthorised role escalation</strong></td>
+                                    <td>Critical</td>
+                                    <td>Low</td>
+                                    <td>Enforce server-side security checks directly inside Firestore DB Security Rules, not only in browser routing.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Firebase API Key exposure</strong></td>
+                                    <td>High</td>
+                                    <td>Medium</td>
+                                    <td>Configure strict domain locks inside the Google Cloud Console to only allow connections from vercel.app.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cross-browser compatibility</strong></td>
+                                    <td>Medium</td>
+                                    <td>Medium</td>
+                                    <td>Perform browser automated testing on Edge, Chrome, Safari; integrate CSS custom properties fallbacks.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Slide 14: System Screens - Splash Screen -->
+                <section class="slide" id="slide-14" data-title="Splash Screen">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">13. System Screens: Splash Intro</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>First Impression Branding</h3>
+                                <p>Upon loading the portal, users are greeted with a premium, animated splash intro to set the visual tone of the platform.</p>
+                                <h4>Key Interactions:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><i class="fa-solid fa-check text-blue"></i> Smooth fadeIn animations for cap logo</li>
+                                    <li><i class="fa-solid fa-check text-blue"></i> SlideUp typography for brand header</li>
+                                    <li><i class="fa-solid fa-check text-blue"></i> Custom 2-stage animated loading progress bar</li>
+                                    <li><i class="fa-solid fa-check text-blue"></i> Auto redirection to Auth panel in 3.4 seconds</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-frame">
+                                <img src="screenshots/splash.png" alt="Splash Screen">
+                                <div class="screenshot-caption">EduNotify Splash Intro</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 15: System Screens - Login & Selection -->
+                <section class="slide" id="slide-15" data-title="Auth Flow">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">14. System Screens: Authentication Gate</h2>
+                        <div class="content-grid col-2">
+                            <div class="screenshot-carousel">
+                                <div class="carousel-track">
+                                    <div class="carousel-item-slide">
+                                        <img src="screenshots/login_role.png" alt="Role Selection">
+                                        <div class="screenshot-caption">Step 1: Role Selection Grid</div>
+                                    </div>
+                                    <div class="carousel-item-slide">
+                                        <img src="screenshots/login_credentials.png" alt="Credentials Form">
+                                        <div class="screenshot-caption">Step 2: Credentials Form View</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-block">
+                                <h3>Secure Role Selection Routing</h3>
+                                <p>Bypassing credentials check for incorrect roles via a multi-step login flow.</p>
+                                <h4>Security Features:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><strong>1. Explicit Role Grid:</strong> Users click their role (Student, Professor, Admin, Super Admin) with targeted hover feedback.</li>
+                                    <li><strong>2. Badge Context:</strong> The login form updates dynamically showing the selected role badge.</li>
+                                    <li><strong>3. Password Toggle:</strong> Built-in password visibility helper.</li>
+                                    <li><strong>4. Session Persistence:</strong> "Remember me" options.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 16: System Screens - Registration Flow -->
+                <section class="slide" id="slide-16" data-title="Registration Flow">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">15. System Screens: Registration Flow</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>Account Profile Provisioning</h3>
+                                <p>A role-aware sign-up workflow that creates the Firebase Authentication account and automatically initializes a Firestore profile document.</p>
+                                <h4>Data Validations:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><i class="fa-solid fa-shield text-blue"></i> Trims all inputs to remove whitespaces</li>
+                                    <li><i class="fa-solid fa-shield text-blue"></i> Email verification validation format checks</li>
+                                    <li><i class="fa-solid fa-shield text-blue"></i> Minimum password security limits (8+ chars)</li>
+                                    <li><i class="fa-solid fa-shield text-blue"></i> Unique Institution ID query checks on Firestore</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-carousel">
+                                <div class="carousel-track">
+                                    <div class="carousel-item-slide">
+                                        <img src="screenshots/register_role.png" alt="Register Role">
+                                        <div class="screenshot-caption">Step 1: Selecting Registration Role</div>
+                                    </div>
+                                    <div class="carousel-item-slide">
+                                        <img src="screenshots/register_form.png" alt="Register Form">
+                                        <div class="screenshot-caption">Step 2: Profile Forms Fields</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 17: System Screens - Student Dashboard -->
+                <section class="slide" id="slide-17" data-title="Student View">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">16. Student Dashboard</h2>
+                        <div class="content-grid col-2">
+                            <div class="screenshot-frame">
+                                <img src="screenshots/dash_student.png" alt="Student Dashboard">
+                                <div class="screenshot-caption">Student Overview Portal View</div>
+                            </div>
+                            <div class="text-block">
+                                <h3>Academic Schedule & Alerts</h3>
+                                <p>Personalized student home hub serving essential notifications and scheduling metrics.</p>
+                                <h4>Key Elements:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><strong>Stat Cards:</strong> Gradient icon blocks highlighting Active Courses (6), Unread Notices (3), Exams (2), GPA (82%).</li>
+                                    <li><strong>Recent Notices:</strong> Filtered urgent/deadline streams (Mid-terms, Library hours).</li>
+                                    <li><strong>This Week Schedule:</strong> Timetable display showing courses, room allocations, and professors.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 18: System Screens - Professor Dashboard -->
+                <section class="slide" id="slide-18" data-title="Professor View">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">17. Professor Dashboard</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>Course Oversight & Notice Posting</h3>
+                                <p>Facilitates announcements creation and course listing for academic staff.</p>
+                                <h4>Key Actions:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><strong>Course Lists:</strong> Responsive lists displaying student count and timing tags.</li>
+                                    <li><strong>Post Notice Form:</strong> Interface to choose targeted course, write headline text, type notices body detail, and sync to DB.</li>
+                                    <li><strong>Action Feedback:</strong> Toast notifications immediately alert the user upon successful postings.</li>
+                                </ul>
+                            </div>
+                            <div class="screenshot-frame">
+                                <img src="screenshots/dash_professor.png" alt="Professor Dashboard">
+                                <div class="screenshot-caption">Professor Overview Portal View</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 19: System Screens - Admin Dashboards -->
+                <section class="slide" id="slide-19" data-title="Admin Views">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">18. Admin & Super Admin Views</h2>
+                        <div class="content-grid col-2">
+                            <div class="screenshot-carousel">
+                                <div class="carousel-track">
+                                    <div class="carousel-item-slide">
+                                        <img src="screenshots/dash_admin.png" alt="Admin Dashboard">
+                                        <div class="screenshot-caption">Admin View: Broadcasting notices</div>
+                                    </div>
+                                    <div class="carousel-item-slide">
+                                        <img src="screenshots/dash_superadmin.png" alt="Super Admin Dashboard">
+                                        <div class="screenshot-caption">Super Admin View: Firebase Live Users</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-block">
+                                <h3>System Operations Control</h3>
+                                <p>Management dashboards for system-wide auditing and oversight.</p>
+                                <h4>Key Functions:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><strong>Recent Registrations:</strong> Table displaying new profile updates, roles, and status tags.</li>
+                                    <li><strong>Global Broadcasts:</strong> Interface to target audiences (All, Students, Faculty).</li>
+                                    <li><strong>Firebase Live Users:</strong> Super Admin real-time table displaying auth logs, and registration stats.</li>
+                                    <li><strong>Cloud Status:</strong> Live service uptime checks.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 20: Performance & Conclusion -->
+                <section class="slide" id="slide-20" data-title="Conclusion">
+                    <div class="slide-layout">
+                        <h2 class="slide-heading">19. Results, Future Scope & Conclusion</h2>
+                        <div class="content-grid col-2">
+                            <div class="text-block">
+                                <h3>Core Achievements</h3>
+                                <p>EduNotify successfully demonstrates a modern, role-aware academic notification pipeline deployable at zero hosting cost.</p>
+                                <h4>Future Roadmap:</h4>
+                                <ul class="bullet-list-tight">
+                                    <li><i class="fa-solid fa-circle-nodes text-blue"></i> Full CRUD database listeners (onSnapshot)</li>
+                                    <li><i class="fa-solid fa-circle-nodes text-blue"></i> PWA conversion for offline push updates</li>
+                                    <li><i class="fa-solid fa-circle-nodes text-blue"></i> SMS integration using Cloud Functions</li>
+                                    <li><i class="fa-solid fa-circle-nodes text-blue"></i> AI notice prioritization (tfjs models)</li>
+                                </ul>
+                            </div>
+                            <div class="visual-box flex-center">
+                                <div class="conclusion-badge">
+                                    <i class="fa-solid fa-certificate"></i>
+                                    <h3>Project Status</h3>
+                                    <p class="status-live">● LIVE & DEPLOYED</p>
+                                    <p class="project-url">edunotify.vercel.app</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Slide Navigation / Controls -->
+            <footer class="slide-controls">
+                <div class="control-left">
+                    <button class="nav-btn" id="prev-btn" title="Previous Slide (Left Arrow)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span class="slide-index" id="slide-index">Slide 1 of 20</span>
+                    <button class="nav-btn" id="next-btn" title="Next Slide (Right Arrow/Space)"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="control-center">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progress-bar"></div>
+                    </div>
+                </div>
+                <div class="control-right">
+                    <button class="control-action" id="fullscreen-btn" title="Toggle Fullscreen (F)"><i class="fa-solid fa-expand"></i></button>
+                </div>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="presentation.js"></script>
+</body>
+</html>

@@ -485,6 +485,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const refreshBtn = document.getElementById('refresh-users');
         if (refreshBtn) refreshBtn.addEventListener('click', e => { e.preventDefault(); loadLiveUsers(); });
 
+        if (new URLSearchParams(window.location.search).get('demo') === 'superadmin') {
+            const mockUsers = [
+                { name: 'Ken Aldrn', role: 'superadmin', roleLabel: 'Super Admin', id: 'SAD-2026-999', email: 'ken@institution.edu', date: '01/05/2026' },
+                { name: 'Dr. Marcus Lee', role: 'professor', roleLabel: 'Professor', id: 'PROF-2026-011', email: 'm.lee@institution.edu', date: '27/05/2026' },
+                { name: 'Aisha Rahman', role: 'admin', roleLabel: 'Admin', id: 'ADM-2026-002', email: 'a.rahman@institution.edu', date: '28/05/2026' },
+                { name: 'Riya Sharma', role: 'student', roleLabel: 'Student', id: 'STU-2026-041', email: 'r.sharma@institution.edu', date: '29/05/2026' },
+                { name: 'Tom Nguyen', role: 'student', roleLabel: 'Student', id: 'STU-2026-040', email: 't.nguyen@institution.edu', date: '30/05/2026' }
+            ];
+            const rows = mockUsers.map(u => `<tr>
+                <td>${u.name}</td>
+                <td><span class="role-pill ${u.role}">${u.roleLabel}</span></td>
+                <td>${u.id}</td>
+                <td>${u.email}</td>
+                <td>${u.date}</td>
+            </tr>`).join('');
+            container.innerHTML = `
+                <table class="user-table">
+                    <thead><tr><th>Name</th><th>Role</th><th>ID</th><th>Email</th><th>Joined</th></tr></thead>
+                    <tbody>${rows}</tbody>
+                </table>`;
+            return;
+        }
+
         try {
             const snap = await db.collection('users').orderBy('registered', 'desc').limit(20).get();
             if (snap.empty) { container.innerHTML = '<p class="loading-msg">No users registered yet.</p>'; return; }
@@ -546,5 +569,90 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Broadcast sent to all users!', 'success');
         e.target.reset();
     });
+
+    /* ─────────────────────────────────────────────────────
+       14. SCREENSHOT DEMO ROUTER
+       Automatically configures the UI for screenshots when loaded with ?demo=...
+    ───────────────────────────────────────────────────── */
+    const params = new URLSearchParams(window.location.search);
+    const demoMode = params.get('demo');
+    if (demoMode) {
+        if (demoMode === 'splash') {
+            const logo = document.querySelector('.splash-logo');
+            const brand = document.querySelector('.splash-brand');
+            const tagline = document.querySelector('.splash-tagline');
+            const progress = document.querySelector('.splash-progress');
+            const bar = document.querySelector('.splash-progress-bar');
+            const lines = document.querySelectorAll('.bg-lines span');
+            if (logo) { logo.style.animation = 'none'; logo.style.opacity = '1'; logo.style.transform = 'scale(1)'; }
+            if (brand) { brand.style.animation = 'none'; brand.style.opacity = '1'; brand.style.transform = 'translateY(0)'; }
+            if (tagline) { tagline.style.animation = 'none'; tagline.style.opacity = '1'; tagline.style.transform = 'translateY(0)'; }
+            if (progress) { progress.style.animation = 'none'; progress.style.opacity = '1'; }
+            if (bar) { bar.style.animation = 'none'; bar.style.width = '70%'; }
+            lines.forEach(span => { span.style.animation = 'none'; span.style.opacity = '1'; });
+            return;
+        }
+
+        // Disable splash screen immediately
+        splash.style.display = 'none';
+        splash.classList.add('slide-up');
+        appWrap.classList.add('show');
+        document.body.style.overflow = 'auto';
+
+        if (demoMode === 'login_role') {
+            // Already showing role step by default
+        } else if (demoMode === 'login_credentials') {
+            const role = params.get('role') || 'student';
+            currentLoginRole = role;
+            const cfg = roleConfig[role];
+            formTitle.textContent   = `${cfg.label} Login`;
+            roleBadge.className     = `role-badge ${cfg.badgeClass}`;
+            badgeIcon.className     = cfg.icon;
+            badgeLabel.textContent  = cfg.label;
+            userIdInput.placeholder = rolePlaceholders[role];
+            userIdInput.value       = rolePlaceholders[role]; // Pre-fill with placeholder
+            submitBtn.className     = `submit-btn ${cfg.btnClass}`;
+            stepRole.classList.remove('active-step');
+            stepLogin.classList.add('active-step');
+        } else if (demoMode === 'register_role') {
+            switchTab('register');
+        } else if (demoMode === 'register_form') {
+            switchTab('register');
+            const role = params.get('role') || 'student';
+            currentRegisterRole = role;
+            const cfg = roleConfig[role];
+            regRoleBadge.className    = `role-badge ${cfg.badgeClass}`;
+            regBadgeIcon.className    = cfg.icon;
+            regBadgeLabel.textContent = cfg.label;
+            regFormRole.textContent   = cfg.label;
+            regSubmitBtn.className    = `submit-btn ${cfg.btnClass}`;
+            
+            // Fill in fields with dummy data for a nice screenshot
+            document.getElementById('reg-first').value = 'Jane';
+            document.getElementById('reg-last').value = 'Doe';
+            document.getElementById('reg-id').value = role === 'student' ? 'STU-2026-001' : 'PROF-2026-011';
+            document.getElementById('reg-email').value = rolePlaceholders[role];
+            document.getElementById('reg-password').value = 'password123';
+            document.getElementById('reg-confirm').value = 'password123';
+            
+            regStepRole.classList.remove('active-step');
+            regStepForm.classList.add('active-step');
+        } else if (['student', 'professor', 'admin', 'superadmin'].includes(demoMode)) {
+            const nameMap = {
+                student: { first: 'Ken', last: 'Aldrn' },
+                professor: { first: 'Marcus', last: 'Lee' },
+                admin: { first: 'Aisha', last: 'Rahman' },
+                superadmin: { first: 'Ken', last: 'Aldrn' }
+            };
+            const user = nameMap[demoMode];
+            showDashboard({
+                firstName: user.first,
+                lastName: user.last,
+                role: demoMode,
+                email: `${user.first.toLowerCase().replace('. ', '')}@institution.edu`,
+                institutionId: demoMode === 'student' ? 'STU-2026-001' : (demoMode === 'professor' ? 'PROF-2026-011' : 'ADM-2026-002')
+            });
+        }
+    }
 
 });
